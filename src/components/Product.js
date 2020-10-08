@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { ProductConsumer } from "../context";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { ProductConsumer } from '../context';
+import PropTypes from 'prop-types';
 
 export default class Product extends Component {
   render() {
@@ -11,7 +12,7 @@ export default class Product extends Component {
         <div className="card">
           <div
             className="img-container p-5"
-            onClick={() => console.log("you clicked image container")}
+            onClick={() => console.log('you clicked image container')}
           >
             <Link to="/details">
               <img src={img} alt="product" className="card-img-top" />
@@ -20,12 +21,12 @@ export default class Product extends Component {
               className="cart-btn"
               disabled={inCart ? true : false}
               onClick={() => {
-                console.log("added to cart");
+                console.log('added to cart');
               }}
             >
               {inCart ? (
                 <p className="text-capitalize mb-0" disabled>
-                  {" "}
+                  {' '}
                   in inCart
                 </p>
               ) : (
@@ -45,6 +46,16 @@ export default class Product extends Component {
     );
   }
 }
+
+Product.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number,
+    img: PropTypes.string,
+    title: PropTypes.string,
+    price: PropTypes.number,
+    inCart: PropTypes.bool
+  }).isRequired
+};
 
 const ProductWrapper = styled.div`
   .card {
